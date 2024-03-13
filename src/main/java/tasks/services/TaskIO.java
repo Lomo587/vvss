@@ -19,81 +19,60 @@ public class TaskIO {
     private static final int secondsInDay = 86400;
     private static final int secondsInHour = 3600;
     private static final int secondsInMin = 60;
+    private static final String error_st="IO exception reading or writing file";
 
     private static final Logger log = Logger.getLogger(TaskIO.class.getName());
     public static void write(TaskList tasks, OutputStream out) throws IOException {
-        DataOutputStream dataOutputStream = new DataOutputStream(out);
-        try {
+        try (DataOutputStream dataOutputStream = new DataOutputStream(out)) {
             dataOutputStream.writeInt(tasks.size());
-            for (Task t : tasks){
+            for (Task t : tasks) {
                 dataOutputStream.writeInt(t.getTitle().length());
                 dataOutputStream.writeUTF(t.getTitle());
                 dataOutputStream.writeBoolean(t.isActive());
                 dataOutputStream.writeInt(t.getRepeatInterval());
-                if (t.isRepeated()){
+                if (t.isRepeated()) {
                     dataOutputStream.writeLong(t.getStartTime().getTime());
                     dataOutputStream.writeLong(t.getEndTime().getTime());
-                }
-                else {
+                } else {
                     dataOutputStream.writeLong(t.getTime().getTime());
                 }
             }
         }
-        finally {
-            dataOutputStream.close();
-        }
     }
     public static void read(TaskList tasks, InputStream in)throws IOException {
-        DataInputStream dataInputStream = new DataInputStream(in);
-        try {
+        try (DataInputStream dataInputStream = new DataInputStream(in)) {
             int listLength = dataInputStream.readInt();
-            for (int i = 0; i < listLength; i++){
+            for (int i = 0; i < listLength; i++) {
                 int titleLength = dataInputStream.readInt();
                 String title = dataInputStream.readUTF();
                 boolean isActive = dataInputStream.readBoolean();
                 int interval = dataInputStream.readInt();
                 Date startTime = new Date(dataInputStream.readLong());
                 Task taskToAdd;
-                if (interval > 0){
+                if (interval > 0) {
                     Date endTime = new Date(dataInputStream.readLong());
                     taskToAdd = new Task(title, startTime, endTime, interval);
-                }
-                else {
+                } else {
                     taskToAdd = new Task(title, startTime);
                 }
                 taskToAdd.setActive(isActive);
                 tasks.add(taskToAdd);
             }
         }
-        finally {
-            dataInputStream.close();
-        }
     }
     public static void writeBinary(TaskList tasks, File file)throws IOException{
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(file);
-            write(tasks,fos);
-        }
-        catch (IOException e){
-            log.error("IO exception reading or writing file");
-        }
-        finally {
-            fos.close();
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            write(tasks, fos);
+        } catch (IOException e) {
+            log.error(error_st);
         }
     }
 
     public static void readBinary(TaskList tasks, File file) throws IOException{
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(file);
+        try (FileInputStream fis = new FileInputStream(file)) {
             read(tasks, fis);
-        }
-        catch (IOException e){
-            log.error("IO exception reading or writing file");
-        }
-        finally {
-            fis.close();
+        } catch (IOException e) {
+            log.error(error_st);
         }
     }
     public static void write(TaskList tasks, Writer out) throws IOException {
@@ -120,25 +99,16 @@ public class TaskIO {
 
     }
     public static void writeText(TaskList tasks, File file) throws IOException {
-        FileWriter fileWriter = new FileWriter(file);
-        try {
+        try (FileWriter fileWriter = new FileWriter(file)) {
             write(tasks, fileWriter);
-        }
-        catch (IOException e ){
-            log.error("IO exception reading or writing file");
-        }
-        finally {
-            fileWriter.close();
+        } catch (IOException e) {
+            log.error(error_st);
         }
 
     }
     public static void readText(TaskList tasks, File file) throws IOException {
-        FileReader fileReader = new FileReader(file);
-        try {
+        try (FileReader fileReader = new FileReader(file)) {
             read(tasks, fileReader);
-        }
-        finally {
-            fileReader.close();
         }
     }
     //// service methods for reading
@@ -273,7 +243,8 @@ public class TaskIO {
         int seconds = (interval - (secondsInDay*days + secondsInHour*hours + secondsInMin*minutes));
 
         int[] time = new int[]{days, hours, minutes, seconds};
-        int i = 0, j = time.length-1;
+        int i = 0;
+        int j = time.length-1;
         while (time[i] == 0 || time[j] == 0){
             if (time[i] == 0) i++;
             if (time[j] == 0) j--;
@@ -297,7 +268,7 @@ public class TaskIO {
             TaskIO.writeBinary(taskList, Main.savedTasksFile);
         }
         catch (IOException e){
-            log.error("IO exception reading or writing file");
+            log.error(error_st);
         }
     }
 }
