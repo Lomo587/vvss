@@ -24,6 +24,7 @@ public class Task implements Serializable, Cloneable {
     }
     public Task(String title, Date time){
         if (time.getTime() < 0) {
+
             log.error("time below bound");
             throw new IllegalArgumentException("Time cannot be negative");
         }
@@ -172,13 +173,6 @@ public class Task implements Serializable, Cloneable {
                 ", active=" + active +
                 '}';
     }
-    @Override
-    protected Task clone() throws CloneNotSupportedException {
-        Task task  = (Task)super.clone();
-        task.time = (Date)this.time.clone();
-        task.start = (Date)this.start.clone();
-        task.end = (Date)this.end.clone();
-        return task;
-    }
+
 }
 
