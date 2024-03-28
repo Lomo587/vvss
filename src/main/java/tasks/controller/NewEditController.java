@@ -207,5 +207,15 @@ public class NewEditController {
         return result;
     }
 
+    public Task makeTask(String descriere, Date dataInceput, Date dataSfarsit, int interval) throws Exception {
+        if(!descriere.matches(".*[a-zA-Z]+.*"))
+            throw new Exception("descriere invalida");
+
+        if(interval < 1)
+            throw new Exception("interval invalid");
+
+        return new Task(descriere, dataInceput, dataSfarsit, interval);
+    }
+
 
 }
