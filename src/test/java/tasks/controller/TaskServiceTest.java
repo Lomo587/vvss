@@ -18,7 +18,7 @@ class TaskServiceTest {
     }
 
     @BeforeAll
-    void setUp2() {
+    static void setUp2() {
         SimpleDateFormat sdf2 = Task.getDateFormat();
     }
 
@@ -104,6 +104,6 @@ class TaskServiceTest {
     }
 
     @AfterAll
-    void tearDown2() {
+    static void tearDown2() {
     }
 }

@@ -31,3 +31,16 @@
 2024-03-28 18:43:13 INFO  Main:40 - application start
 2024-03-28 18:43:13 INFO  Controller:74 - Main controller initializing
 2024-03-28 18:43:20 INFO  NewEditController:89 - new/edit window initializing
+2024-04-11 11:38:14 INFO  Main:35 - saved data reading
+2024-04-11 11:38:14 INFO  Main:40 - application start
+2024-04-11 11:38:14 INFO  Controller:74 - Main controller initializing
+2024-04-11 11:39:01 INFO  Main:35 - saved data reading
+2024-04-11 11:39:01 INFO  Main:40 - application start
+2024-04-11 11:39:01 INFO  Controller:74 - Main controller initializing
+2024-04-11 11:48:08 INFO  Main:35 - saved data reading
+2024-04-11 11:48:08 INFO  Main:40 - application start
+2024-04-11 11:48:09 INFO  Controller:74 - Main controller initializing
+2024-04-11 11:54:32 INFO  Main:35 - saved data reading
+2024-04-11 11:54:32 INFO  Main:40 - application start
+2024-04-11 11:54:32 INFO  Controller:74 - Main controller initializing
+2024-04-11 11:55:50 INFO  TaskInfoController:24 - task info window initializing
