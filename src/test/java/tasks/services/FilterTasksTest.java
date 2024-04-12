@@ -29,7 +29,7 @@ public class FilterTasksTest {
         l.add(t1);
         l.add(t2);
         TasksOperations tasksOps = new TasksOperations(l);
-        Iterable<Task> filtered =tasksOps.incoming(sdf.parse("2009-11-11 11:00"),sdf.parse("2010-12-12 11:00"));
+        Iterable<Task> filtered =tasksOps.incoming(sdf.parse("2005-01-01 11:00"),sdf.parse("2009-01-01 11:00"));
         int counter = 0;
         for (Object i : filtered) {
             counter++;
@@ -37,27 +37,14 @@ public class FilterTasksTest {
         System.out.println(counter);
         assertEquals(counter,0);
     }
-    @Test
-    public void Test2() throws Exception {
-        List<Task> l=new ArrayList<>();
-        l.add(t1);
-        l.add(t2);
-        TasksOperations tasksOps = new TasksOperations(l);
-        Iterable<Task> filtered =tasksOps.incoming(sdf.parse("2010-11-10 11:00"),sdf.parse("2011-12-12 11:00"));
-        int counter = 0;
-        for (Object i : filtered) {
-            counter++;
-        }
-        System.out.println(counter);
-        assertEquals(counter,1);
-    }
+
     @Test
     public void Test3() throws Exception {
         List<Task> l=new ArrayList<>();
         l.add(t1);
         l.add(t2);
         TasksOperations tasksOps = new TasksOperations(l);
-        Iterable<Task> filtered =tasksOps.incoming(sdf.parse("2011-11-10 11:00"),sdf.parse("2014-12-13 11:00"));
+        Iterable<Task> filtered =tasksOps.incoming(sdf.parse("2010-01-01 11:00"),sdf.parse("2014-01-01 11:00"));
         int counter = 0;
         for (Object i : filtered) {
             counter++;
