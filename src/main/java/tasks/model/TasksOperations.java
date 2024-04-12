@@ -22,9 +22,16 @@ public class TasksOperations {
         for (Task t : tasks) {
             Date nextTime = t.nextTimeAfter(start);
             System.out.println(nextTime);
-            if (nextTime != null && (nextTime.before(end) || nextTime.equals(end))) {
-                incomingTasks.add(t);
-                System.out.println(t.getTitle());
+            if (nextTime != null){
+                if(nextTime.before(end)) {
+                    incomingTasks.add(t);
+                    System.out.println(t.getTitle());
+                }
+                else if(nextTime.equals(end)) {
+                    incomingTasks.add(t);
+                    System.out.println(t.getTitle());
+                }
+
             }
         }
         return incomingTasks;
