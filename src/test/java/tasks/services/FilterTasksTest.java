@@ -26,6 +26,8 @@ public class FilterTasksTest {
     @Test
     public void Test1() throws Exception {
         List<Task> l=new ArrayList<>();
+        t1.setActive(true);
+        t2.setActive(true);
         l.add(t1);
         l.add(t2);
         TasksOperations tasksOps = new TasksOperations(l);
@@ -39,8 +41,10 @@ public class FilterTasksTest {
     }
 
     @Test
-    public void Test3() throws Exception {
+    public void Test2() throws Exception {
         List<Task> l=new ArrayList<>();
+        t1.setActive(true);
+        t2.setActive(true);
         l.add(t1);
         l.add(t2);
         TasksOperations tasksOps = new TasksOperations(l);
