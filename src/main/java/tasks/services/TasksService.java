@@ -52,4 +52,9 @@ public class TasksService {
 
         return filtered;
     }
+
+    public void add(Task T)
+    {
+        tasks.add(T);
+    }
 }
