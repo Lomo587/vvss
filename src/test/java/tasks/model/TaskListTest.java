@@ -26,7 +26,6 @@ public class TaskListTest {
     {
         R.add(T);
         assertEquals(R.size(),1);
-
     }
 
     @Test
@@ -34,6 +33,5 @@ public class TaskListTest {
     {
         R.add(T);
         assertEquals(R.getAll().toArray()[0],T);
-
     }
 }
